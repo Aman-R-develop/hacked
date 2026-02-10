@@ -1,4 +1,4 @@
-/* HeroSection.css */
+/* hero.css */
 
 *,
 *::before,
@@ -25,7 +25,7 @@ body {
 .hero-container {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: 300vh;
   overflow-x: hidden;
   background: 
     radial-gradient(ellipse at 20% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
@@ -46,6 +46,7 @@ body {
   height: 100%;
   z-index: 1;
   pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
 /* ========================================
@@ -68,6 +69,7 @@ body {
     transparent 2px
   );
   opacity: 0.4;
+  transition: opacity 0.5s ease;
 }
 
 .vignette {
@@ -84,328 +86,7 @@ body {
     transparent 40%,
     rgba(0, 5, 8, 0.4) 100%
   );
-}
-
-/* ========================================
-   Terminal Window
-   ======================================== */
-
-.terminal-window {
-  position: fixed;
-  top: 2rem;
-  left: 2rem;
-  z-index: 100;
-  background: rgba(0, 10, 15, 0.95);
-  border: 1px solid rgba(0, 255, 136, 0.4);
-  border-radius: 8px;
-  min-width: 380px;
-  max-width: 450px;
-  box-shadow: 
-    0 0 30px rgba(0, 255, 136, 0.15),
-    0 0 60px rgba(0, 255, 136, 0.05),
-    inset 0 0 30px rgba(0, 255, 136, 0.03);
-  opacity: 0;
-  visibility: hidden;
-  backdrop-filter: blur(10px);
-}
-
-.terminal-header {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  background: rgba(0, 255, 136, 0.08);
-  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
-  border-radius: 8px 8px 0 0;
-}
-
-.terminal-dots {
-  display: flex;
-  gap: 8px;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.dot.red {
-  background: #ff5f56;
-  box-shadow: 0 0 8px rgba(255, 95, 86, 0.6);
-}
-
-.dot.yellow {
-  background: #ffbd2e;
-  box-shadow: 0 0 8px rgba(255, 189, 46, 0.6);
-}
-
-.dot.green {
-  background: #27c93f;
-  box-shadow: 0 0 8px rgba(39, 201, 63, 0.6);
-}
-
-.terminal-title {
-  margin-left: auto;
-  font-size: 0.7rem;
-  color: rgba(0, 255, 136, 0.7);
-  letter-spacing: 0.1em;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-}
-
-.terminal-body {
-  padding: 16px 20px;
-  min-height: 50px;
-}
-
-.terminal-text {
-  color: #00ff88;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
-  line-height: 1.6;
-}
-
-.terminal-cursor {
-  color: #00ff88;
-  opacity: 0;
-  margin-left: 2px;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
-}
-
-.terminal-cursor.visible {
-  opacity: 1;
-}
-
-/* ========================================
-   Status Indicator
-   ======================================== */
-
-.status-indicator {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 20px;
-  background: rgba(0, 10, 15, 0.9);
-  border: 1px solid rgba(255, 0, 100, 0.3);
-  border-radius: 4px;
-  opacity: 0;
-  visibility: hidden;
-  backdrop-filter: blur(10px);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff0066;
-  box-shadow: 0 0 10px rgba(255, 0, 102, 0.8);
-  animation: statusPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes statusPulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(0.8);
-  }
-}
-
-.status-text {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  color: #ff0066;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
-}
-
-/* ========================================
-   Side Menu with Social Icons
-   ======================================== */
-
-.side-menu {
-  position: fixed;
-  left: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Menu Icon - Hamburger */
-.menu-icon {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 0.75rem;
-  border: 1px solid rgba(0, 255, 136, 0.3);
-  border-radius: 8px;
-  background: rgba(0, 10, 15, 0.8);
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.menu-icon:hover {
-  transform: scale(1.05);
-  border-color: rgba(0, 255, 136, 0.6);
-  background: rgba(0, 20, 30, 0.9);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
-}
-
-.menu-icon span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #00ff88;
-  border-radius: 1px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-}
-
-/* Menu Icon Open State - X transformation */
-.menu-icon.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-  background: #00ffff;
-}
-
-.menu-icon.open span:nth-child(2) {
-  opacity: 0;
-  transform: translateX(-10px);
-}
-
-.menu-icon.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-  background: #00ffff;
-}
-
-.menu-icon:hover span {
-  background: #00ffff;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
-}
-
-/* Social Menu */
-.social-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  opacity: 0;
-  visibility: hidden;
-  padding: 0.5rem 0;
-}
-
-.social-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 1rem;
-  background: rgba(0, 10, 15, 0.9);
-  border: 1px solid rgba(0, 255, 136, 0.3);
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  min-width: 140px;
-}
-
-.social-item:hover {
-  background: rgba(0, 30, 40, 0.95);
-  border-color: #00ffff;
-  transform: translateX(5px);
-  box-shadow: 
-    0 0 20px rgba(0, 255, 255, 0.3),
-    inset 0 0 15px rgba(0, 255, 255, 0.05);
-}
-
-.social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  color: #00ff88;
-  transition: all 0.3s ease;
-}
-
-.social-icon-svg {
-  width: 18px;
-  height: 18px;
-  filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.5));
-}
-
-.social-item:hover .social-icon {
-  color: #00ffff;
-  transform: scale(1.1);
-}
-
-.social-item:hover .social-icon-svg {
-  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
-}
-
-.social-name {
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: rgba(0, 255, 136, 0.8);
-  text-transform: uppercase;
-  text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
-  transition: all 0.3s ease;
-}
-
-.social-item:hover .social-name {
-  color: #00ffff;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-/* Individual social item colors on hover */
-.social-item:nth-child(1):hover { border-color: #ffffff; }
-.social-item:nth-child(1):hover .social-icon { color: #ffffff; }
-.social-item:nth-child(1):hover .social-name { color: #ffffff; }
-
-.social-item:nth-child(2):hover { border-color: #5865F2; }
-.social-item:nth-child(2):hover .social-icon { color: #5865F2; }
-.social-item:nth-child(2):hover .social-name { color: #5865F2; }
-
-.social-item:nth-child(3):hover { border-color: #1DA1F2; }
-.social-item:nth-child(3):hover .social-icon { color: #1DA1F2; }
-.social-item:nth-child(3):hover .social-name { color: #1DA1F2; }
-
-.social-item:nth-child(4):hover { border-color: #E4405F; }
-.social-item:nth-child(4):hover .social-icon { color: #E4405F; }
-.social-item:nth-child(4):hover .social-name { color: #E4405F; }
-
-.social-item:nth-child(5):hover { border-color: #0A66C2; }
-.social-item:nth-child(5):hover .social-icon { color: #0A66C2; }
-.social-item:nth-child(5):hover .social-name { color: #0A66C2; }
-
-.vertical-text {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.4em;
-  color: #00ff88;
-  text-transform: uppercase;
-  text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
-}
-
-.menu-line {
-  width: 1px;
-  height: 60px;
-  background: linear-gradient(to bottom, #00ff88, transparent);
-  opacity: 0.5;
+  transition: opacity 0.5s ease;
 }
 
 /* ========================================
@@ -424,99 +105,6 @@ body {
 .corner.top-right { top: 1rem; right: 1rem; }
 .corner.bottom-left { bottom: 1rem; left: 1rem; }
 .corner.bottom-right { bottom: 1rem; right: 1rem; }
-
-/* ========================================
-   Scroll Progress
-   ======================================== */
-
-.scroll-progress {
-  position: fixed;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.scroll-label {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  color: #00ff88;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-}
-
-.progress-container {
-  position: relative;
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.progress-track {
-  width: 3px;
-  height: 100%;
-  background: rgba(0, 255, 136, 0.15);
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-fill {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(to top, #00ff88, #00ffff, #ffd700);
-  border-radius: 2px;
-  transition: height 0.1s ease-out;
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
-}
-
-.progress-glow {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, rgba(0, 255, 136, 0.6) 0%, transparent 70%);
-  pointer-events: none;
-  transition: bottom 0.1s ease-out;
-}
-
-.section-counter {
-  font-size: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.section-counter .current {
-  color: #00ff88;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.section-counter .divider {
-  color: rgba(0, 255, 136, 0.4);
-  font-size: 0.6rem;
-}
-
-.section-counter .total {
-  color: rgba(0, 255, 136, 0.5);
-  font-size: 0.7rem;
-}
 
 /* ========================================
    Scrollable Content
@@ -762,341 +350,151 @@ body {
 }
 
 /* ========================================
-   Responsive Styles
+   Hero Hidden State
    ======================================== */
 
-@media screen and (max-width: 1024px) {
-  .terminal-window {
-    min-width: 300px;
-    max-width: 350px;
-  }
-  
-  .social-item {
-    min-width: 120px;
-    padding: 0.5rem 0.8rem;
-  }
-  
-  .social-name {
-    font-size: 0.65rem;
-  }
-}
-/* hero.css - Add/Update these styles */
-
-/* Change canvas from fixed to absolute within hero container */
-.hero-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Hero container should have proper height for all sections */
-.hero-container {
-  position: relative;
-  width: 100%;
-  min-height: 300vh; /* 3 sections * 100vh */
-  overflow: hidden;
-  background: 
-    radial-gradient(ellipse at 20% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(0, 255, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.02) 0%, transparent 60%),
-    linear-gradient(180deg, #000508 0%, #000a10 50%, #000508 100%);
-}
-
-/* Overlays should be absolute within hero, not fixed */
-.scanlines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.1) 0px,
-    rgba(0, 0, 0, 0.1) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  opacity: 0.4;
-}
-
-.vignette {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 0%,
-    transparent 40%,
-    rgba(0, 5, 8, 0.4) 100%
-  );
-}
-
-/* UI elements remain fixed but with hero-specific class */
-.terminal-window,
-.status-indicator,
-.side-menu,
-.scroll-progress,
-.corner {
-  position: fixed;
-  z-index: 100;
-}
-
-/* Hide hero UI when scrolled past hero section */
-.hero-container.scrolled-past .terminal-window,
-.hero-container.scrolled-past .status-indicator,
-.hero-container.scrolled-past .side-menu,
-.hero-container.scrolled-past .scroll-progress {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-/* Add to hero.css */
-
-/* Hero hidden state - fade out fixed elements when scrolling past */
 .hero-container.hero-hidden .hero-canvas,
 .hero-container.hero-hidden .scanlines,
 .hero-container.hero-hidden .vignette,
-.hero-container.hero-hidden .terminal-window,
-.hero-container.hero-hidden .status-indicator,
-.hero-container.hero-hidden .side-menu,
-.hero-container.hero-hidden .scroll-progress,
 .hero-container.hero-hidden .corner {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s ease;
 }
 
-/* Ensure hero-container has correct height */
-.hero-container {
-  position: relative;
-  width: 100%;
-  min-height: 300vh; /* 3 sections */
-  overflow-x: hidden;
-  background: 
-    radial-gradient(ellipse at 20% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(0, 255, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.02) 0%, transparent 60%),
-    linear-gradient(180deg, #000508 0%, #000a10 50%, #000508 100%);
+/* ========================================
+   Responsive Styles
+   ======================================== */
+
+@media screen and (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(2rem, 12vw, 4rem);
+    letter-spacing: 0.1em;
+  }
+
+  .subtitle-line {
+    font-size: clamp(0.75rem, 3vw, 1rem);
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .corner {
+    font-size: 1rem;
+  }
+
+  .title-underline {
+    gap: 0.5rem;
+  }
+
+  .underline-segment {
+    width: 40px;
+  }
 }
 
-/* Canvas stays fixed */
-.hero-canvas {
+@media screen and (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(1.5rem, 10vw, 3rem);
+  }
+
+  .subtitle-line {
+    font-size: 0.7rem;
+  }
+
+  .section-content {
+    padding: 1rem;
+  }
+}
+
+/* ========================================
+   Social Links Container
+   ======================================== */
+
+.social-links-container {
+  display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  left: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 50;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Show only on large screens (lg breakpoint: 1024px) */
+@media screen and (min-width: 1024px) {
+  .social-links-container {
+    display: flex;
+  }
+}
+
+.social-links-container.hidden {
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.5s ease;
 }
 
-/* Overlays stay fixed */
-.scanlines {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.1) 0px,
-    rgba(0, 0, 0, 0.1) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  opacity: 0.4;
-  transition: opacity 0.5s ease;
-}
-
-.vignette {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 0%,
-    transparent 40%,
-    rgba(0, 5, 8, 0.4) 100%
-  );
-  transition: opacity 0.5s ease;
-}
-
-/* Scroll content is relative for normal flow */
-.scroll-content {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-}
-
-/* H Logo Icon - Add this to your existing hero.css */
-
-.h-logo {
-  width: 32px;
-  height: 32px;
-  position: relative;
-  cursor: pointer;
+.social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
+  width: 48px;
+  height: 48px;
+  color: rgba(0, 255, 136, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.h-logo:hover {
-  transform: scale(1.1);
+.social-link:hover {
+  transform: translateX(5px) scale(1.2);
 }
 
-.h-logo:active {
-  transform: scale(0.95);
+.social-link svg {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px;
+  min-height: 28px;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));
+  transition: all 0.3s ease;
 }
 
-.h-bar {
-  position: absolute;
-  background: linear-gradient(180deg, #00ff88, #00ffff);
-  border-radius: 2px;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+.social-link:hover svg {
+  filter: drop-shadow(0 0 15px currentColor);
 }
 
-/* Left vertical bar of H */
-.h-bar-left {
-  width: 4px;
-  height: 100%;
-  left: 4px;
-  top: 0;
-  transform-origin: center center;
+/* Individual social link hover colors */
+.social-link:nth-child(1) {
+  color: rgba(0, 255, 136, 0.7);
 }
 
-/* Right vertical bar of H */
-.h-bar-right {
-  width: 4px;
-  height: 100%;
-  right: 4px;
-  top: 0;
-  transform-origin: center center;
+.social-link:nth-child(1):hover {
+  color: #0A66C2;
 }
 
-/* Middle horizontal bar of H */
-.h-bar-middle {
-  width: calc(100% - 8px);
-  height: 4px;
-  left: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  transform-origin: center center;
+.social-link:nth-child(1):hover svg {
+  filter: drop-shadow(0 0 15px rgba(10, 102, 194, 1));
 }
 
-/* Hover glow effect */
-.h-logo:hover .h-bar {
-  box-shadow: 
-    0 0 15px rgba(0, 255, 136, 0.8),
-    0 0 30px rgba(0, 255, 255, 0.4);
+.social-link:nth-child(2) {
+  color: rgba(0, 255, 136, 0.7);
 }
 
-/* Open state - X formation (handled by GSAP, but CSS fallback) */
-.h-logo.open .h-bar-left {
-  transform: translateX(8px) rotate(45deg);
+.social-link:nth-child(2):hover {
+  color: #E4405F;
 }
 
-.h-logo.open .h-bar-right {
-  transform: translateX(-8px) rotate(-45deg);
+.social-link:nth-child(2):hover svg {
+  filter: drop-shadow(0 0 15px rgba(228, 64, 95, 1));
 }
 
-.h-logo.open .h-bar-middle {
-  transform: translateY(-50%) scaleX(0);
-  opacity: 0;
+.social-link:nth-child(3) {
+  color: rgba(0, 255, 136, 0.7);
 }
 
-/* Pulse animation for the logo */
-@keyframes logoPulse {
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 255, 0.3);
-  }
+.social-link:nth-child(3):hover {
+  color: #1877F2;
 }
 
-.h-bar {
-  animation: logoPulse 2s ease-in-out infinite;
-}
-
-/* Alternative: Glitch effect on hover */
-.h-logo:hover .h-bar-left {
-  animation: glitchBar 0.3s ease-in-out;
-}
-
-.h-logo:hover .h-bar-right {
-  animation: glitchBar 0.3s ease-in-out 0.1s;
-}
-
-.h-logo:hover .h-bar-middle {
-  animation: glitchBar 0.3s ease-in-out 0.05s;
-}
-
-@keyframes glitchBar {
-  0%, 100% {
-    transform: translateX(0) translateY(0);
-  }
-  20% {
-    transform: translateX(-2px) translateY(1px);
-  }
-  40% {
-    transform: translateX(2px) translateY(-1px);
-  }
-  60% {
-    transform: translateX(-1px) translateY(0);
-  }
-  80% {
-    transform: translateX(1px) translateY(1px);
-  }
-}
-
-/* Keep the middle bar centered during glitch */
-.h-logo:hover .h-bar-middle {
-  animation: glitchBarMiddle 0.3s ease-in-out 0.05s;
-}
-
-@keyframes glitchBarMiddle {
-  0%, 100% {
-    transform: translateY(-50%) translateX(0);
-  }
-  20% {
-    transform: translateY(-50%) translateX(-2px);
-  }
-  40% {
-    transform: translateY(-50%) translateX(2px);
-  }
-  60% {
-    transform: translateY(-50%) translateX(-1px);
-  }
-  80% {
-    transform: translateY(-50%) translateX(1px);
-  }
-}
-
-/* Remove old menu-icon styles if present */
-.menu-icon {
-  display: none;
-}
-
-.logo-image{
-  height: 80px;
+.social-link:nth-child(3):hover svg {
+  filter: drop-shadow(0 0 15px rgba(24, 119, 242, 1));
 }

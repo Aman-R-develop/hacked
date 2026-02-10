@@ -7,6 +7,7 @@ import Gallery from "@/components/Gallery/GalleryDemo";
 import Footer from "./components/Footer/Footer";
 import Sponsor from "./components/Sponsor/Sposnor";
 import Prizes from "./components/Prizes/Prizes";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
     const [showIntro, setShowIntro] = useState(true);
@@ -37,6 +38,14 @@ function App() {
 
     return (
         <main>
+            <Navbar logo={"./images/logo.png"} items={[
+                { label: "Home", href: "#home" },
+                { label: "Teams", href: "#teams" },
+                { label: "Sponsors", href: "#sponsors" },
+                { label: "Prizes", href: "#prizes" },
+                { label: "Gallery", href: "#gallery" },
+
+            ]} />
             <HeroSection />
             <Teams />
             <Sponsor />
