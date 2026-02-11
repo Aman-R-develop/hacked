@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({
   onNavClick,
 }) => {
   const resolvedPillTextColor = pillTextColor ?? baseColor;
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true); // Always open
   const [currentActive, setCurrentActive] = useState(activeHref || '');
 
   const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
