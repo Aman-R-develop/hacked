@@ -1,7 +1,7 @@
 // GalleryDemo.tsx
 import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
-import { ZoomParallax } from './Gallery';
+import { ZoomParallax } from './Past_Sponsor';
 
 export default function GalleryDemo() {
   useEffect(() => {
@@ -53,6 +53,11 @@ export default function GalleryDemo() {
       src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1280&h=720&fit=crop',
       alt: 'Forest trees and sunlight',
     },
+    // Generate more images for testing (30 total)
+    ...Array.from({ length: 23 }).map((_, i) => ({
+      src: `https://picsum.photos/seed/${i + 100}/800/600`, // Random placeholder images
+      alt: `Sponsor Logo ${i + 8}`,
+    })),
   ];
 
   return (

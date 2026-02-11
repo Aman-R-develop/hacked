@@ -3,7 +3,7 @@ import { SpiralDemo } from "@/components/ui/spiral-demo";
 import { useState, useEffect } from 'react';
 import { HeroSection } from "@/components/Hero/Hero";
 import Teams from "@/components/Team/Team";
-import Gallery from "@/components/Gallery/GalleryDemo";
+import Gallery from "@/components/Past_Sponsor/GalleryDemo";
 import Footer from "./components/Footer/Footer";
 import Sponsor from "./components/Sponsor/Sposnor";
 import Prizes from "./components/Prizes/Prizes";

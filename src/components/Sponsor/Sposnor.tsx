@@ -5,7 +5,7 @@ interface PlanProps {
   tier: string;
   price: string;
   description: string;
-  features: string[];
+  // features removed
   color: string;
   accentColor: string;
   isPopular?: boolean;
@@ -16,27 +16,14 @@ const plans: PlanProps[] = [
     tier: "Gold",
     price: "₹50,000",
     description: "Step into the limelight as a Gold Sponsor, gaining prominent exposure and valuable engagement opportunities.",
-    features: [
-      "Media & print presence",
-      "Merchandise sleeve placement",
-      "Event intro sessions showcase",
-      "Campus visibility (2,500+ reach)"
-    ],
     color: "rgba(20, 28, 30, 0.95)", // Dark teal background
     accentColor: "#49e3fb", // Cyan accent from Hero
     isPopular: false,
   },
   {
-    tier: "Title",
+    tier: "Gold",
     price: "₹70,000",
     description: "Be the face of Hacked 4.0 as the Title Sponsor, enjoying top-tier benefits and the highest visibility.",
-    features: [
-      "Exclusive branding on all materials",
-      "Dedicated 15-20 min session",
-      "Merchandise spotlight placement",
-      "Exclusive booth space",
-      "Campus promotions (2,500+ reach)"
-    ],
     color: "rgba(30, 25, 22, 0.9)", // Dark warm background
     accentColor: "#CD7F32", // Bronze accent
     isPopular: true,
@@ -45,12 +32,6 @@ const plans: PlanProps[] = [
     tier: "Silver",
     price: "₹30,000",
     description: "Make your mark as a Silver Sponsor, connecting with participants and audience in a meaningful way.",
-    features: [
-      "Social media & print promotions",
-      "Event intro sessions showcase",
-      "Promotional materials distribution",
-      "2,500+ students reach"
-    ],
     color: "rgba(20, 20, 30, 0.95)", // Dark cool background
     accentColor: "#b5a1e3", // Lavender accent from Hero
     isPopular: false,
@@ -140,26 +121,7 @@ const SponsorCard = ({
             {plan.description}
           </p>
 
-          <ul className="features-list">
-            {plan.features.map((feature, i) => (
-              <li
-                key={i}
-                className="feature-item"
-                style={{ color: textColor }}
-              >
-                <svg
-                  className="check-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke={plan.accentColor}
-                  strokeWidth="3"
-                >
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                {feature}
-              </li>
-            ))}
-          </ul>
+          {/* Features list removed */}
         </div>
 
         <button
