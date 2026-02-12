@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import "./Sponsor.css";
+import "./sponsor.css";
 
 interface PlanProps {
   tier: string;
