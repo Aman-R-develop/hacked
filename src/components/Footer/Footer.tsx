@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Mail, MapPin, Instagram, Linkedin, Calendar, Users, Code } from "lucide-react";
-import "./Footer.css";
+import "./footer.css";
 
 // ============ TextHoverEffect Component ============
 interface TextHoverEffectProps {
