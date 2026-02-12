@@ -41,10 +41,9 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const tlRefs = useRef<Array<gsap.core.Timeline | null>>([]);
-  const activeTweenRefs = useRef<Array<gsap.core.Tween | null>>([]);
   const logoImgRef = useRef<HTMLImageElement | null>(null);
   const logoRef = useRef<HTMLButtonElement | null>(null);
-  const navItemsRef = useRef<HTMLDivElement | null>(null);
+  const navItemsRef = useRef<HTMLUListElement | null>(null);
   const navContainerRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
   const capsuleRef = useRef<HTMLDivElement | null>(null);
@@ -239,14 +238,6 @@ const Navbar: React.FC<NavbarProps> = ({
       });
     }
   }, [isNavOpen, ease]);
-
-  const handleEnter = (_i: number) => {
-    // hover animation disabled
-  };
-
-  const handleLeave = (_i: number) => {
-    // hover animation disabled
-  };
 
   const handleLogoClick = () => {
     const logoBtn = logoRef.current;

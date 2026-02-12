@@ -1,19 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  Instagram,
-  Twitter,
-  Linkedin,
-  Github,
-  Globe,
-  Calendar,
-  Users,
-  Code,
-} from "lucide-react";
+import { Mail, MapPin, Instagram, Linkedin, Calendar, Users, Code } from "lucide-react";
 import "./Footer.css";
 
 // ============ TextHoverEffect Component ============
@@ -194,7 +181,7 @@ const Footer: React.FC = () => {
     },
   ];
 
-  const socialLinks = [,
+  const socialLinks = [
     { icon: <Instagram size={20} />, label: "Instagram", href: "https://instagram.com/hacked4" },
     { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://linkedin.com/company/hacked4" },
   ];

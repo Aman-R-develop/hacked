@@ -31,7 +31,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
     const rows = Math.ceil(count / Math.ceil(Math.sqrt(count)));
 
     // Shuffle available grid positions
-    const positions = [];
+    const positions: Array<{ r: number; c: number }> = [];
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         positions.push({ r, c });
@@ -60,8 +60,6 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
       const left = 5 + (gridPos.c * cellWidth) + jitterX; // Start at 5vw
 
       const width = Math.floor(Math.random() * 10) + 10; // 10vw to 20vw (slightly smaller than before for density)
-      const height = width * 0.7; // Maintain rough aspect ratio but vary slightly? Or just generic.
-
       return {
         position: 'absolute' as const,
         top: `${top}vh`,
