@@ -20,7 +20,6 @@ class AnimationController {
     private size: number
     private stars: Star[] = []
     private onComplete?: () => void
-    private isCompleted = false
 
     private readonly changeEventTime = 0.32
     private readonly cameraZ = -400
@@ -67,12 +66,9 @@ class AnimationController {
         }
 
         this.time = 0
-        this.isCompleted = false
-
         // Create timeline that plays ONCE
         this.timeline = gsap.timeline({
             onComplete: () => {
-                this.isCompleted = true
                 // Keep the final frame rendered
                 this.render()
                 // Notify completion
@@ -257,11 +253,7 @@ class Star {
     private rotationDirection: number
     private expansionRate: number
     private finalScale: number
-    private cameraZ: number
-    private viewZoom: number = 100
-
     constructor(cameraZ: number, cameraTravelDistance: number, random: () => number) {
-        this.cameraZ = cameraZ
         this.angle = random() * Math.PI * 2
         this.distance = 30 * random() + 15
         this.rotationDirection = random() > 0.5 ? 1 : -1

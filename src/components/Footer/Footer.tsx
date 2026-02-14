@@ -1,20 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  Instagram,
-  Twitter,
-  Linkedin,
-  Github,
-  Globe,
-  Calendar,
-  Users,
-  Code,
-} from "lucide-react";
-import "./Footer.css";
+import { Mail, MapPin, Instagram, Linkedin, Calendar, Users, Code } from "lucide-react";
+import "./footer.css";
 
 // ============ TextHoverEffect Component ============
 interface TextHoverEffectProps {
@@ -150,7 +137,15 @@ const FooterBackgroundGradient: React.FC = () => {
 
 // ============ Main Footer Component ============
 const Footer: React.FC = () => {
-  const footerLinks = [
+  type FooterLink = {
+    label: string;
+    href: string;
+    icon?: React.ReactNode;
+    target?: string;
+    pulse?: boolean;
+  };
+
+  const footerLinks: { title: string; links: FooterLink[] }[] = [
     {
       title: "Event",
       links: [
@@ -162,7 +157,7 @@ const Footer: React.FC = () => {
       title: "Resources",
       links: [
         { label: "FAQs", href: "#faq" },
-        { label: "Code of Conduct", href: "#conduct" },
+        { label: "Code of Conduct", href: "/pdf/Code%20of%20Conduct%20Hacked%204.0.pdf", target: "_blank" },
       ],
     },
     {
@@ -186,7 +181,7 @@ const Footer: React.FC = () => {
     },
   ];
 
-  const socialLinks = [,
+  const socialLinks = [
     { icon: <Instagram size={20} />, label: "Instagram", href: "https://instagram.com/hacked4" },
     { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://linkedin.com/company/hacked4" },
   ];
@@ -226,11 +221,15 @@ const Footer: React.FC = () => {
                     key={link.label}
                     className={link.pulse ? "link-item-pulse" : ""}
                   >
-                    <a href={link.href} className="footer-link">
-                      {link.icon && <span className="link-icon">{link.icon}</span>}
+                    <a
+                      href={link.href}
+                      className="footer-link"
+                      {...(link.target ? { target: link.target, rel: "noopener noreferrer" } : {})}
+                    >
+                      {'icon' in link && link.icon && <span className="link-icon">{link.icon}</span>}
                       {link.label}
                     </a>
-                    {link.pulse && <span className="pulse-dot"></span>}
+                    {'pulse' in link && link.pulse && <span className="pulse-dot"></span>}
                   </li>
                 ))}
               </ul>

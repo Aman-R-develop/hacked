@@ -36,15 +36,14 @@ const Navbar: React.FC<NavbarProps> = ({
   onNavClick,
 }) => {
   const resolvedPillTextColor = pillTextColor ?? baseColor;
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [currentActive, setCurrentActive] = useState(activeHref || '');
 
   const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const tlRefs = useRef<Array<gsap.core.Timeline | null>>([]);
-  const activeTweenRefs = useRef<Array<gsap.core.Tween | null>>([]);
   const logoImgRef = useRef<HTMLImageElement | null>(null);
   const logoRef = useRef<HTMLButtonElement | null>(null);
-  const navItemsRef = useRef<HTMLDivElement | null>(null);
+  const navItemsRef = useRef<HTMLUListElement | null>(null);
   const navContainerRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
   const capsuleRef = useRef<HTMLDivElement | null>(null);
@@ -101,22 +100,25 @@ const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const capsule = capsuleRef.current;
-    // Set capsule to start closed since isNavOpen starts as false
+    // Set capsule to start open since isNavOpen starts as true
     if (capsule) {
       gsap.set(capsule, {
-        width: 0,
-        opacity: 0,
-        paddingLeft: 0,
-        paddingRight: 0
+        width: 'auto',
+        opacity: 1,
+        paddingLeft: 16,
+        paddingRight: 4
       });
     }
 
-    // Set initial state for nav items - hidden since starting closed
+    // Set initial state for nav items - visible since starting open
     itemRefs.current.forEach((item) => {
       if (item) {
-        gsap.set(item, { opacity: 0, scale: 0.8, x: -10 });
+        gsap.set(item, { opacity: 1, scale: 1, x: 0 });
       }
     });
+
+    // Layout pills since we start open
+    layoutPills();
 
     const onResize = () => {
       if (isNavOpen) {
@@ -236,14 +238,6 @@ const Navbar: React.FC<NavbarProps> = ({
       });
     }
   }, [isNavOpen, ease]);
-
-  const handleEnter = (_i: number) => {
-    // hover animation disabled
-  };
-
-  const handleLeave = (_i: number) => {
-    // hover animation disabled
-  };
 
   const handleLogoClick = () => {
     const logoBtn = logoRef.current;

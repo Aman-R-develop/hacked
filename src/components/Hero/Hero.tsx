@@ -61,15 +61,10 @@ export const HeroSection: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
-  const scrollProgressRef = useRef<HTMLDivElement>(null);
-  const terminalRef = useRef<HTMLDivElement>(null);
   const socialLinksRef = useRef<HTMLDivElement>(null);
 
   const smoothCameraPos = useRef({ x: 0, y: 30, z: 100 });
 
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [terminalText, setTerminalText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
   const [isInHeroSection, setIsInHeroSection] = useState(true);
 
   // Countdown timer state
@@ -120,76 +115,10 @@ export const HeroSection: React.FC = () => {
     animationId: null
   });
 
-  // Terminal typing effect
-  useEffect(() => {
-    const messages = [
-      '> Initializing TRINITY protocol...',
-      '> Accessing BMU secure network...',
-      '> Decrypting temporal signatures...',
-      '> WARNING: Wheel of Time detected...',
-      '> The Pattern is unraveling...',
-      '> BREACH SUCCESSFUL',
-      '> Welcome, Hacker...'
-    ];
-
-    let messageIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let timeout: ReturnType<typeof setTimeout>;
-
-    const type = () => {
-      const fullMessage = messages[messageIndex];
-
-      if (!isDeleting) {
-        setTerminalText(fullMessage.substring(0, charIndex + 1));
-        charIndex++;
-
-        if (charIndex === fullMessage.length) {
-          isDeleting = true;
-          timeout = setTimeout(type, 2500);
-          return;
-        }
-      } else {
-        setTerminalText(fullMessage.substring(0, charIndex - 1));
-        charIndex--;
-
-        if (charIndex === 0) {
-          isDeleting = false;
-          messageIndex = (messageIndex + 1) % messages.length;
-        }
-      }
-
-      timeout = setTimeout(type, isDeleting ? 25 : 60);
-    };
-
-    const startDelay = setTimeout(() => {
-      type();
-    }, 1000);
-
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 530);
-
-    return () => {
-      clearTimeout(timeout);
-      clearTimeout(startDelay);
-      clearInterval(cursorInterval);
-    };
-  }, []);
-
   // Initial text animations
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
-
-      if (terminalRef.current) {
-        tl.fromTo(
-          terminalRef.current,
-          { opacity: 0, y: -20, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, visibility: 'visible', duration: 0.8, ease: 'power3.out' },
-          0
-        );
-      }
 
       if (titleRef.current) {
         const chars = titleRef.current.querySelectorAll('.title-char');
@@ -232,14 +161,6 @@ export const HeroSection: React.FC = () => {
         );
       }
 
-      if (scrollProgressRef.current) {
-        tl.fromTo(
-          scrollProgressRef.current,
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, visibility: 'visible', duration: 1, ease: 'power2.out' },
-          1.2
-        );
-      }
 
       // Animate social links
       if (socialLinksRef.current) {
@@ -286,19 +207,6 @@ export const HeroSection: React.FC = () => {
           ease: 'none'
         });
 
-        if (terminalRef.current) {
-          gsap.to(terminalRef.current, {
-            scrollTrigger: {
-              trigger: heroSectionRef.current,
-              start: 'top top',
-              end: '30% top',
-              scrub: 1
-            },
-            opacity: 0,
-            y: -50,
-            ease: 'none'
-          });
-        }
       }
     });
 
@@ -458,8 +366,10 @@ export const HeroSection: React.FC = () => {
     const createWheelOfTime = () => {
       const { current: refs } = threeRefs;
       if (!refs.scene) return;
+      const scene = refs.scene;
 
-      refs.wheelOfTime = new THREE.Group();
+      const wheelOfTime = new THREE.Group();
+      refs.wheelOfTime = wheelOfTime;
 
       // Refined wheel layers with formal colors
       const wheelLayers = [
@@ -479,7 +389,7 @@ export const HeroSection: React.FC = () => {
         });
         const ring = new THREE.Mesh(geometry, material);
         ring.userData = { rotationSpeed: 0.015 * (index % 2 === 0 ? 1 : -1) * (1 + index * 0.15) };
-        refs.wheelOfTime.add(ring);
+        wheelOfTime.add(ring);
       });
 
       // Spokes with primary color
@@ -492,7 +402,7 @@ export const HeroSection: React.FC = () => {
         });
         const spoke = new THREE.Mesh(spokeGeometry, spokeMaterial);
         spoke.rotation.z = (i * Math.PI) / 4;
-        refs.wheelOfTime.add(spoke);
+        wheelOfTime.add(spoke);
       }
 
       // Hub with secondary color
@@ -503,7 +413,7 @@ export const HeroSection: React.FC = () => {
         opacity: 0.5
       });
       const hub = new THREE.Mesh(hubGeometry, hubMaterial);
-      refs.wheelOfTime.add(hub);
+      wheelOfTime.add(hub);
 
       // Runes with primary cyan
       const runeCount = 80;
@@ -529,16 +439,17 @@ export const HeroSection: React.FC = () => {
       });
 
       const runes = new THREE.Points(runeGeometry, runeMaterial);
-      refs.wheelOfTime.add(runes);
+      wheelOfTime.add(runes);
 
-      refs.wheelOfTime.position.z = -600;
-      refs.wheelOfTime.rotation.x = Math.PI * 0.15;
-      refs.scene.add(refs.wheelOfTime);
+      wheelOfTime.position.z = -600;
+      wheelOfTime.rotation.x = Math.PI * 0.15;
+      scene.add(wheelOfTime);
     };
 
     const createTimeRings = () => {
       const { current: refs } = threeRefs;
       if (!refs.scene) return;
+      const scene = refs.scene;
 
       const ringConfigs = [
         { radius: 40, color: COLORS.primary, z: -80, rotationX: 0.4 },
@@ -563,7 +474,7 @@ export const HeroSection: React.FC = () => {
           baseZ: config.z
         };
         refs.timeRings.push(ring);
-        refs.scene.add(ring);
+        scene.add(ring);
       });
     };
 
@@ -831,8 +742,6 @@ export const HeroSection: React.FC = () => {
       setIsInHeroSection(inHero);
 
       const progress = Math.min(scrollY / heroHeight, 1);
-      setScrollProgress(progress);
-
       const { current: refs } = threeRefs;
 
       const cameraPositions = [
